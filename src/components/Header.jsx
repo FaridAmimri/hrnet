@@ -8,11 +8,14 @@ function Header() {
   return (
     <HeaderWrapper>
       <Paper>
-        <Card><PeopleOutlineOutlinedIcon /></Card>
+        <Card>
+          <PeopleOutlineOutlinedIcon />
+        </Card>
         <HeaderContent>
           <Typography variant='h6'>HRnet</Typography>
           <Typography variant='subtitle2'>Create employee</Typography>
         </HeaderContent>
+        <HeaderLink href='/employees'>See Employees</HeaderLink>
       </Paper>
     </HeaderWrapper>
   )
@@ -48,4 +51,12 @@ const HeaderContent = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 15px;
+`
+
+const HeaderLink = styled.a`
+  position: absolute;
+  right: 25px;
+  top: 30px;
+  text-decoration-line: none;
+  color: #3c44b1;
 `
