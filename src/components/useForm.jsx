@@ -5,7 +5,8 @@ import styled from 'styled-components'
 
 export function useForm(initialFValues) {
   const [values, setValues] = useState(initialFValues)
-  const [selectedDate, setSelectedDate] = useState(null)
+  const [selectedBirthday, setSelectedBirthday] = useState(null)
+  const [selectedHireDay, setSelectedHireDay] = useState(null)
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -15,19 +16,21 @@ export function useForm(initialFValues) {
     })
   }
 
-  const handleDateChange = (newValue) => {
-    setSelectedDate(newValue)
-    console.log(selectedDate)
+  const handleBirthdayChange = (newValue) => {
+    setSelectedBirthday(newValue)
   }
 
+  const handleHireDayChange = (newValue) => {
+    setSelectedHireDay(newValue)
+  }
 
   return {
     values,
-    setValues,
-    selectedDate,
-    setSelectedDate,
+    selectedBirthday,
+    selectedHireDay,
     handleInputChange,
-    handleDateChange
+    handleBirthdayChange,
+    handleHireDayChange
   }
 }
 
@@ -36,9 +39,9 @@ export function Form(props) {
 }
 
 const FormWrapper = styled.form`
-  margin: 30px;
+  margin: 25px;
   .css-11lq3yg-MuiGrid-root {
-    height: 400px;
+    height: 450px;
     background-color: white;
   }
   .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
@@ -53,6 +56,16 @@ const FormWrapper = styled.form`
     justify-content: space-between;
     height: 100%;
     padding: 20px;
-    align-items: center;
+  }
+  .css-gj1fbr-MuiGrid-root {
+    margin: auto;
+  }
+  .css-jh47zj-MuiButtonBase-root-MuiButton-root {
+    margin-right: 20px;
+    width: 100px;
+  }
+  .css-r99y1x-MuiButtonBase-root-MuiButton-root {
+    background-color: #8080802b;
+    width: 100px;
   }
 `
