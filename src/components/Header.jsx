@@ -1,9 +1,8 @@
 /** @format */
 
-import React from 'react'
 import { Paper, Card, Typography } from '@mui/material'
-import styled from 'styled-components'
 import PeopleOutlineOutlinedIcon from '@mui/icons-material/PeopleOutlineOutlined'
+import styled from 'styled-components'
 
 function Header() {
   return (
@@ -27,6 +26,7 @@ const HeaderWrapper = styled.header`
     display: flex;
     justify-content: center;
     background-color: #f4f5fd;
+    padding: 15px;
   }
   .css-bhp9pd-MuiPaper-root-MuiCard-root {
     text-align: center;
