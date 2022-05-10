@@ -6,7 +6,7 @@ import { useForm, Form } from '../components/useForm'
 import MuiInput from '../components/MuiInput'
 import MuiSelect from '../components/MuiSelect'
 import MuiDatePicker from '../components/MuiDatePicker'
-// import { useState } from 'React'
+import MuiButton from '../components/MuiButton'
 
 const initialFValues = {
   id: 0,
@@ -22,8 +22,14 @@ const initialFValues = {
 }
 
 function EmployeeForm() {
-  const { values, handleInputChange, handleDateChange } =
-    useForm(initialFValues)
+  const {
+    values,
+    selectedBirthday,
+    selectedHireDay,
+    handleInputChange,
+    handleBirthdayChange,
+    handleHireDayChange
+  } = useForm(initialFValues)
 
   return (
     <Form>
@@ -41,17 +47,15 @@ function EmployeeForm() {
             value={values.lastName}
             onChange={handleInputChange}
           />
-          <MuiInput
-            name='street'
-            label='street'
-            value={values.street}
-            onChange={handleInputChange}
+          <MuiDatePicker
+            label='Date of Birth'
+            value={selectedBirthday}
+            onChange={handleBirthdayChange}
           />
-          <MuiInput
-            name='city'
-            label='city'
-            value={values.city}
-            onChange={handleInputChange}
+          <MuiDatePicker
+            label='Start Date'
+            value={selectedHireDay}
+            onChange={handleHireDayChange}
           />
           <MuiSelect
             name='departmentId'
@@ -62,16 +66,36 @@ function EmployeeForm() {
           />
         </Grid>
         <Grid item xs={6}>
-          <MuiDatePicker
-            label='Date of Birth'
-            value={values.dateofBirth}
-            onChange={handleDateChange}
+          <MuiInput
+            name='street'
+            label='Street'
+            value={values.street}
+            onChange={handleInputChange}
           />
-          <MuiDatePicker
-            label='Start Date'
-            value={values.startDate}
-            onChange={handleDateChange}
+          <MuiInput
+            name='city'
+            label='City'
+            value={values.city}
+            onChange={handleInputChange}
           />
+          <MuiSelect
+            name='state'
+            label='state'
+            value={values.state}
+            onChange={handleInputChange}
+            options={employeeService.getStatesCollection()}
+          />
+          <MuiInput
+            name='zipCode'
+            label='Zip Code'
+            type='number'
+            value={values.zipCode}
+            onChange={handleInputChange}
+          />
+          <div className='buttons'>
+            <MuiButton type='submit' text='Submit' />
+            <MuiButton color='grey' text='Reset' />
+          </div>
         </Grid>
       </Grid>
     </Form>
