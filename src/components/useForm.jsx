@@ -3,8 +3,11 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 
-export function useForm(initialFValues) {
+export function useForm(initialFValues, validateOnChange=false, validate) {
+
   const [values, setValues] = useState(initialFValues)
+  const [errors, setErrors] = useState({})
+
   const [selectedBirthday, setSelectedBirthday] = useState(null)
   const [selectedHireDay, setSelectedHireDay] = useState(null)
 
@@ -14,6 +17,8 @@ export function useForm(initialFValues) {
       ...values,
       [name]: value
     })
+    if (validateOnChange)
+    validate({ [name]: value})
   }
 
   const handleBirthdayChange = (newValue) => {
@@ -24,18 +29,33 @@ export function useForm(initialFValues) {
     setSelectedHireDay(newValue)
   }
 
+  const resetForm = () => {
+    setValues(initialFValues)
+    setErrors({})
+  }
+
   return {
     values,
+    setValues,
+    errors,
+    setErrors,
     selectedBirthday,
     selectedHireDay,
     handleInputChange,
     handleBirthdayChange,
-    handleHireDayChange
+    handleHireDayChange,
+    resetForm
   }
 }
 
 export function Form(props) {
-  return <FormWrapper>{props.children}</FormWrapper>
+  const { children, ...other } = props
+
+  return (
+    <FormWrapper {...other}>
+      {props.children}
+    </FormWrapper>
+  )
 }
 
 const FormWrapper = styled.form`
