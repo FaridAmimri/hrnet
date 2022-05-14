@@ -4,7 +4,7 @@ import { Paper, Card, Typography } from '@mui/material'
 import PeopleOutlineOutlinedIcon from '@mui/icons-material/PeopleOutlineOutlined'
 import styled from 'styled-components'
 
-function Header() {
+function Header({ title, subtitle, content, link }) {
   return (
     <HeaderWrapper>
       <Paper>
@@ -12,10 +12,10 @@ function Header() {
           <PeopleOutlineOutlinedIcon />
         </Card>
         <HeaderContent>
-          <Typography variant='h6'>HRnet</Typography>
-          <Typography variant='subtitle2'>Create employee</Typography>
+          <Typography variant='h6'>{title}</Typography>
+          <Typography variant='subtitle2'>{subtitle}</Typography>
         </HeaderContent>
-        <HeaderLink href='/employees'>See Employees</HeaderLink>
+        <HeaderLink href={link}>{content}</HeaderLink>
       </Paper>
     </HeaderWrapper>
   )
