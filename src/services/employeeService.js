@@ -8,7 +8,7 @@ export const getDepartmentCollection = () => [
   { id: 5, title: 'Legal' }
 ]
 
-export const getStatesCollection = () => [
+export const getStateCollection = () => [
   { id: 1, title: 'Alabama' },
   { id: 2, title: 'Alaska' },
   { id: 3, title: 'American Samoa' },
@@ -77,13 +77,13 @@ const KEYS = {
 
 export function insertEmployee(data) {
   let employees = getAllEmployees()
-  data['id'] = generateEmployeeId
+  data['id'] = generateEmployeeId()
   employees.push(data)
   localStorage.setItem(KEYS.employees, JSON.stringify(employees))
 }
 
 export function generateEmployeeId() {
-  if (localStorage.getItem(KEYS.employees) == null)
+  if (localStorage.getItem(KEYS.employeeId) == null)
     localStorage.setItem(KEYS.employeeId, '0')
   var id = parseInt(localStorage.getItem(KEYS.employeeId))
   localStorage.setItem(KEYS.employeeId, (++id).toString())
@@ -93,12 +93,12 @@ export function generateEmployeeId() {
 export function getAllEmployees() {
   if (localStorage.getItem(KEYS.employees) == null)
     localStorage.setItem(KEYS.employees, JSON.stringify([]))
-  return JSON.parse(localStorage.getItem(KEYS.employees))
-  // let departments = getDepartmentCollection()
-  // let states = getStatesCollection()
-  // return employees.map((employee) => ({
-  //   employee
-  // department: departments[employee.departmentId - 1].title,
-  // state: states[employee.state - 1].title
-  // }))
+  let employees = JSON.parse(localStorage.getItem(KEYS.employees))
+  let departments = getDepartmentCollection()
+  let states = getStateCollection()
+  return employees.map((employee) => ({
+    ...employee,
+  department: departments[employee.departmentId - 1].title,
+  state: states[employee.stateId - 1].title
+  }))
 }
