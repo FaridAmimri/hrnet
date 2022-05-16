@@ -1,15 +1,12 @@
 /** @format */
 
 import { Table, TableHead, TableRow, TableCell } from '@mui/material'
+import styled from 'styled-components'
 
-export default function useTable(records, headCells) {
-
+export function useTable(records, headCells) {
+  
   const TableContainer = (props) => {
-    return (
-      <Table>
-        {props.children}
-      </Table>
-    )
+    return <Table>{props.children}</Table>
   }
 
   const TableHeader = (props) => {
@@ -17,9 +14,7 @@ export default function useTable(records, headCells) {
       <TableHead>
         <TableRow>
           {headCells.map((headCell) => (
-            <TableCell key={headCell.id}>
-              {headCell.label}
-            </TableCell>
+            <TableCell key={headCell.id}>{headCell.label}</TableCell>
           ))}
         </TableRow>
       </TableHead>
@@ -30,5 +25,20 @@ export default function useTable(records, headCells) {
     TableContainer,
     TableHeader
   }
-
 }
+
+export function MuiTable(props) {
+  const { children, ...other } = props
+
+  return (
+    <TableHeadWrapper {...other}>
+      {props.children}
+    </TableHeadWrapper>
+  )
+}
+
+const TableHeadWrapper = styled.div`
+  .css-15wwp11-MuiTableHead-root {
+    background-color: #0000ff24;
+  }
+`
