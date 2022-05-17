@@ -16,6 +16,7 @@ function MuiDatePicker(props) {
         label={label}
         value={value}
         onChange={onChange}
+        inputFormat="dd/MM/yyyy"
       />
     </LocalizationProvider>
   )
