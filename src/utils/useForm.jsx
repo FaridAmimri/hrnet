@@ -7,9 +7,8 @@ export function useForm(initialFValues, validateOnChange=false, validate) {
 
   const [values, setValues] = useState(initialFValues)
   const [errors, setErrors] = useState({})
-
-  const [selectedBirthday, setSelectedBirthday] = useState(null)
-  const [selectedStartDay, setSelectedStartDay] = useState(null)
+  const [dateOfBirth, setDateOfBirth] = useState(null)
+  const [startDate, setStartDate] = useState(null)
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -21,18 +20,18 @@ export function useForm(initialFValues, validateOnChange=false, validate) {
     validate({ [name]: value})
   }
 
-  const handleBirthdayChange = (newValue) => {
-    setSelectedBirthday(newValue)
+  const handleDateOfBirthChange = (newValue) => {
+    setDateOfBirth(newValue)
   }
 
   const handleStartDayChange = (newValue) => {
-    setSelectedStartDay(newValue)
+    setStartDate(newValue)
   }
 
   const resetForm = () => {
     setValues(initialFValues)
-    setSelectedBirthday(null)
-    setSelectedStartDay(null)
+    setDateOfBirth(null)
+    setStartDate(null)
     setErrors({})
   }
 
@@ -41,10 +40,10 @@ export function useForm(initialFValues, validateOnChange=false, validate) {
     setValues,
     errors,
     setErrors,
-    selectedBirthday,
-    selectedStartDay,
+    dateOfBirth,
+    startDate,
     handleInputChange,
-    handleBirthdayChange,
+    handleDateOfBirthChange,
     handleStartDayChange,
     resetForm
   }
