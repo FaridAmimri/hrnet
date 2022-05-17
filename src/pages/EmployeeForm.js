@@ -13,7 +13,7 @@ const initialFValues = {
   id: 0,
   firstName: '',
   lastName: '',
-  dateofBirth: '',
+  dateOfBirth: '',
   startDate: '',
   street: '',
   city: '',
@@ -27,10 +27,10 @@ function EmployeeForm() {
     values,
     errors,
     setErrors,
-    selectedBirthday,
-    selectedStartDay,
+    dateOfBirth,
+    startDate,
     handleInputChange,
-    handleBirthdayChange,
+    handleDateOfBirthChange,
     handleStartDayChange,
     resetForm
   } = useForm(initialFValues, true, validate)
@@ -46,15 +46,18 @@ function EmployeeForm() {
     // if ('startDate' in fieldValues)
     //   temp.startDate = fieldValues.startDate ? '' : 'This field is required.'
     if ('departmentId' in fieldValues)
-      temp.departmentId = fieldValues.departmentId.length !== 0 ? '' : 'This field is required.'
+      temp.departmentId =
+        fieldValues.departmentId.length !== 0 ? '' : 'This field is required.'
     if ('street' in fieldValues)
       temp.street = fieldValues.street ? '' : 'This field is required.'
     if ('city' in fieldValues)
       temp.city = fieldValues.city ? '' : 'This field is required.'
     if ('stateId' in fieldValues)
-      temp.stateId = fieldValues.stateId.length !== 0 ? '' : 'This field is required.'
+      temp.stateId =
+        fieldValues.stateId.length !== 0 ? '' : 'This field is required.'
     if ('zipCode' in fieldValues)
-      temp.zipCode = fieldValues.zipCode.length > 4 ? '' : 'Minimum 5 numbers required.'
+      temp.zipCode =
+        fieldValues.zipCode.length > 4 ? '' : 'Minimum 5 numbers required.'
 
     setErrors({
       ...temp
@@ -67,13 +70,17 @@ function EmployeeForm() {
   const handleSubmit = (e) => {
     e.preventDefault()
     if (validate())
-    employeeService.insertEmployee(values)
+      employeeService.insertEmployee({
+        ...values,
+        dateOfBirth,
+        startDate
+      })
     resetForm()
   }
 
   return (
     <>
-      <Header 
+      <Header
         title='HRnet'
         subtitle='Create an employee'
         content='See employees'
@@ -98,9 +105,9 @@ function EmployeeForm() {
             />
             <MuiDatePicker
               label='Date of Birth'
-              value={selectedBirthday}
-              onChange={handleBirthdayChange}
-              error={errors.dateofBirth}
+              value={dateOfBirth}
+              onChange={handleDateOfBirthChange}
+              error={errors.dateOfBirth}
             />
             <MuiSelect
               name='departmentId'
@@ -112,7 +119,7 @@ function EmployeeForm() {
             />
             <MuiDatePicker
               label='Start Date'
-              value={selectedStartDay}
+              value={startDate}
               onChange={handleStartDayChange}
               error={errors.startDate}
             />
