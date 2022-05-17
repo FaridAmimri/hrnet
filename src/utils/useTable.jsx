@@ -4,10 +4,6 @@ import { Table, TableHead, TableRow, TableCell } from '@mui/material'
 import styled from 'styled-components'
 
 export function useTable(records, headCells) {
-  
-  const TableContainer = (props) => {
-    return <Table>{props.children}</Table>
-  }
 
   const TableHeader = (props) => {
     return (
@@ -21,10 +17,14 @@ export function useTable(records, headCells) {
     )
   }
 
-  return {
-    TableContainer,
-    TableHeader
+
+  const TableContainer = (props) => {
+    return <Table>{props.children}</Table>
   }
+
+  return {
+    TableHeader,
+    TableContainer  }
 }
 
 export function MuiTable(props) {
