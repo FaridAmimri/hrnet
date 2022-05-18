@@ -10,10 +10,14 @@ import {
   TableRow,
   TableCell,
   TablePagination,
-  TableSortLabel
+  TableSortLabel,
+  Toolbar,
+  InputAdornment
 } from '@mui/material'
 import { MuiTable } from '../utils/useTable'
+import MuiInput from '../components/MuiInput'
 import * as employeeService from '../services/employeeService'
+import SearchIcon from '@mui/icons-material/Search'
 
 const headCells = [
   { id: 'firstName', label: 'First Name' },
@@ -36,6 +40,11 @@ function Employees() {
   const [rowsPerPage, setRowsPerPage] = useState(pages[page])
   const [order, setOrder] = useState()
   const [orderBy, setOrderBy] = useState()
+  const [filter, setFilter] = useState({
+    fn: (items) => {
+      return items
+    }
+  })
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage)
@@ -79,10 +88,20 @@ function Employees() {
   }
 
   const recordsAfterPagingAndSorting = () => {
-    return stableSort(records, getComparator(order, orderBy)).slice(
+    return stableSort(filter.fn(records), getComparator(order, orderBy)).slice(
       page * rowsPerPage,
       (page + 1) * rowsPerPage
     )
+  }
+
+  const handleSearch = (e) => {
+    let target = e.target.value
+    setFilter({
+      fn: (items) => {
+        if (target === '') return items
+        else return items.filter((item) => item.firstName.includes(target))
+      }
+    })
   }
 
   return (
@@ -94,6 +113,19 @@ function Employees() {
         link={'/'}
       />
       <Paper>
+        <Toolbar>
+          <MuiInput
+            label='Search Employees'
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position='start'>
+                  <SearchIcon />
+                </InputAdornment>
+              )
+            }}
+            onChange={handleSearch}
+          ></MuiInput>
+        </Toolbar>
         <Table>
           <TableHead>
             <TableRow>
@@ -118,9 +150,9 @@ function Employees() {
               <TableRow key={item.id}>
                 <TableCell>{item.firstName}</TableCell>
                 <TableCell>{item.lastName}</TableCell>
-                <TableCell>{(item.dateOfBirth).substring(0, 10)}</TableCell>
+                <TableCell>{item.dateOfBirth.substring(0, 10)}</TableCell>
                 <TableCell>{item.department}</TableCell>
-                <TableCell>{(item.startDate).substring(0, 10)}</TableCell>
+                <TableCell>{item.startDate.substring(0, 10)}</TableCell>
                 <TableCell>{item.street}</TableCell>
                 <TableCell>{item.city}</TableCell>
                 <TableCell>{item.state}</TableCell>
