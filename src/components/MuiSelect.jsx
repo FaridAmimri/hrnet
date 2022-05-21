@@ -2,8 +2,7 @@
 
 import { FormControl, InputLabel, Select, MenuItem, FormHelperText } from '@mui/material'
 
-function MuiSelect(props) {
-  const { name, label, value, onChange, options, error = null } = props
+function MuiSelect({ name, label, value, onChange, options, error = null }) {
 
   return (
     <FormControl variant='outlined'

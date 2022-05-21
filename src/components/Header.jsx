@@ -5,6 +5,7 @@ import PeopleOutlineOutlinedIcon from '@mui/icons-material/PeopleOutlineOutlined
 import styled from 'styled-components'
 
 function Header({ title, subtitle, content, link }) {
+  
   return (
     <HeaderWrapper>
       <Paper>

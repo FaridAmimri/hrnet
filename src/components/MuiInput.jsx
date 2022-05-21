@@ -2,8 +2,7 @@
 
 import { TextField } from '@mui/material'
 
-function MuiInput(props) {
-  const { name, label, value, onChange, error = null, ...other } = props
+function MuiInput({ name, label, value, onChange, error = null, ...other }) {
 
   return (
     <TextField

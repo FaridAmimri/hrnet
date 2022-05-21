@@ -2,8 +2,7 @@
 
 import { Button } from '@mui/material'
 
-function MuiButton(props) {
-  const { text, size, color, variant, onClick, ...other } = props
+function MuiButton({ text, size, color, variant, onClick, ...other }) {
 
   return (
     <Button
