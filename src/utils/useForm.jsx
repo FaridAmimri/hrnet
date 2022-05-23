@@ -7,8 +7,8 @@ export function useForm(initialFValues, validateOnChange=false, validate) {
 
   const [values, setValues] = useState(initialFValues)
   const [errors, setErrors] = useState({})
-  const [dateOfBirth, setDateOfBirth] = useState(null)
-  const [startDate, setStartDate] = useState(null)
+  const [dateOfBirth, setDateOfBirth] = useState(new Date())
+  const [startDate, setStartDate] = useState(new Date())
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -17,7 +17,7 @@ export function useForm(initialFValues, validateOnChange=false, validate) {
       [name]: value
     })
     if (validateOnChange)
-    validate({ [name]: value})
+    validate({ [name]: value })
   }
 
   const handleDateOfBirthChange = (newValue) => {
