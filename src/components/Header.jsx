@@ -1,11 +1,10 @@
 /** @format */
-
+import { Link } from 'react-router-dom'
 import { Paper, Card, Typography } from '@mui/material'
 import PeopleOutlineOutlinedIcon from '@mui/icons-material/PeopleOutlineOutlined'
 import styled from 'styled-components'
 
 function Header({ title, subtitle, content, link }) {
-  
   return (
     <HeaderWrapper>
       <Paper>
@@ -16,7 +15,9 @@ function Header({ title, subtitle, content, link }) {
           <Typography variant='h6'>{title}</Typography>
           <Typography variant='subtitle2'>{subtitle}</Typography>
         </HeaderContent>
-        <HeaderLink href={link}>{content}</HeaderLink>
+        <HeaderLink>
+          <Link to={link}>{content}</Link>
+        </HeaderLink>
       </Paper>
     </HeaderWrapper>
   )
@@ -54,10 +55,12 @@ const HeaderContent = styled.div`
   margin-left: 15px;
 `
 
-const HeaderLink = styled.a`
+const HeaderLink = styled.div`
   position: absolute;
   right: 25px;
   top: 30px;
-  text-decoration-line: none;
   color: #3c44b1;
+  a {
+    text-decoration-line: none;
+  }
 `
