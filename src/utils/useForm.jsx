@@ -60,7 +60,6 @@ export function Form(props) {
 }
 
 const FormWrapper = styled.form`
-  margin: 25px;
   .css-11lq3yg-MuiGrid-root {
     height: 450px;
     background-color: white;
@@ -76,7 +75,7 @@ const FormWrapper = styled.form`
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
-    padding: 20px;
+    padding: 20px 0px 20px 50px;
   }
   .css-gj1fbr-MuiGrid-root {
     margin: auto;
