@@ -3,24 +3,28 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import EmployeeForm from '../pages/EmployeeForm'
 import Employees from '../pages/EmployeeTable'
-import { useState } from 'react'
-// import { useForm } from '../utils/useForm'
-import * as employeeServices from '../services/employeeServices'
+import { useState, useEffect } from 'react'
 
 function App() {
+  const [records, setRecords] = useState([])
+  console.log(records.length)
 
-  // const {
-  //   values,
-  // } = useForm()
+  useEffect(() => {
+    if (localStorage.getItem('employees') !== null)
+      setRecords(JSON.parse(localStorage.getItem('employees')))
+  }, [])
 
-  const [records, setRecords] = useState(employeeServices.getAllEmployees())
+  useEffect(() => {
+    if (records.length > 0)
+      localStorage.setItem('employees', JSON.stringify(records))
+  }, [records])
 
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<EmployeeForm />} />
-          <Route path='/employees' element={<Employees />} data={records} />
+          <Route path='/' element={<EmployeeForm setRecords={setRecords} />} />
+          <Route path='/employees' element={<Employees records={records} />} />
         </Routes>
       </BrowserRouter>
     </>
