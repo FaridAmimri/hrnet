@@ -16,7 +16,6 @@ import {
 } from '@mui/material'
 import { MuiTable } from '../utils/useTable'
 import MuiInput from '../components/MuiInput'
-import * as employeeServices from '../services/employeeServices'
 import SearchIcon from '@mui/icons-material/Search'
 
 const headCells = [
@@ -33,18 +32,16 @@ const headCells = [
 
 const pages = [5, 10, 25]
 
-function Employees() {
-  
-  const [records, setRecords] = useState(employeeServices.getAllEmployees())
+function EmployeeTable({ records }) {
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(pages[page])
   const [order, setOrder] = useState()
   const [orderBy, setOrderBy] = useState()
-  const [filter, setFilter] = useState({fn: (items) => {return items}})
-
-  // const {
-  //   TableHeader
-  // } = useTable(headCells)
+  const [filter, setFilter] = useState({
+    fn: (items) => {
+      return items
+    }
+  })
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage)
@@ -99,7 +96,19 @@ function Employees() {
     setFilter({
       fn: (items) => {
         if (target === '') return items
-        else return items.filter((item) => item.firstName.includes(target))
+        else
+          return items.filter(
+            (item) =>
+              item.firstName.toLowerCase().includes(target) ||
+              item.lastName.toLowerCase().includes(target) ||
+              item.dateOfBirth.includes(target) ||
+              item.department.toLowerCase().includes(target) ||
+              item.startDate.includes(target) ||
+              item.street.toLowerCase().includes(target) ||
+              item.city.toLowerCase().includes(target) ||
+              item.state.toLowerCase().includes(target) ||
+              item.zipCode.includes(target)
+          )
       }
     })
   }
@@ -150,9 +159,9 @@ function Employees() {
               <TableRow key={item.id}>
                 <TableCell>{item.firstName}</TableCell>
                 <TableCell>{item.lastName}</TableCell>
-                <TableCell>{item.dateOfBirth.substring(0, 10)}</TableCell>
+                <TableCell>{item.dateOfBirth}</TableCell>
                 <TableCell>{item.department}</TableCell>
-                <TableCell>{item.startDate.substring(0, 10)}</TableCell>
+                <TableCell>{item.startDate}</TableCell>
                 <TableCell>{item.street}</TableCell>
                 <TableCell>{item.city}</TableCell>
                 <TableCell>{item.state}</TableCell>
@@ -176,4 +185,4 @@ function Employees() {
   )
 }
 
-export default Employees
+export default EmployeeTable
