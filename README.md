@@ -39,16 +39,6 @@ npm start
 ```
 You project should be running on port 3000.
 
-## Environment Variables
-
-in the .env file, you should be able to switch bewtween the following environment variables.
-To switch from one to another, just change REACT_APP_ACTIVE_MOCK to false or true.
-
-`mockService` running on local mocked data
-
-`Service` running on Api
-
-
 ## Authors
 
 [@FaridAmimri](https://github.com/FaridAmimri)
