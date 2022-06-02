@@ -2,7 +2,7 @@
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import EmployeeForm from '../pages/EmployeeForm'
-import Employees from '../pages/EmployeeTable'
+import EmployeeTable from '../pages/EmployeeTable'
 import { useState, useEffect } from 'react'
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<EmployeeForm setRecords={setRecords} />} />
-          <Route path='/employees' element={<Employees records={records} />} />
+          <Route path='/employees' element={<EmployeeTable records={records} />} />
         </Routes>
       </BrowserRouter>
     </>
