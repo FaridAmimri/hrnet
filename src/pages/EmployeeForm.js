@@ -99,7 +99,7 @@ function EmployeeForm({ setRecords }) {
         ]
       })
       resetForm()
-      // setOpenModal(true)
+      setOpenModal(true)
     }
   }
 
