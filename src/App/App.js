@@ -7,7 +7,6 @@ import { useState, useEffect } from 'react'
 
 function App() {
   const [records, setRecords] = useState([])
-  console.log(records.length)
 
   useEffect(() => {
     if (localStorage.getItem('employees') !== null)
