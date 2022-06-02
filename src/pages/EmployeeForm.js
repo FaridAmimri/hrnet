@@ -1,13 +1,15 @@
 /** @format */
 
 import Header from '../components/Header'
+import { useState } from 'react'
 import { Grid } from '@mui/material'
+import { useForm, Form } from '../utils/useForm'
 import MuiInput from '../components/MuiInput'
 import MuiSelect from '../components/MuiSelect'
 import MuiDatePicker from '../components/MuiDatePicker'
 import MuiButton from '../components/MuiButton'
-import * as employeeService from '../services/employeeService'
-import { useForm, Form } from '../utils/useForm'
+import { Modal } from 'react-modal-css'
+import * as employeeServices from '../services/employeeServices'
 
 const initialFValues = {
   id: 0,
@@ -22,9 +24,11 @@ const initialFValues = {
   departmentId: ''
 }
 
-function EmployeeForm() {
+function EmployeeForm({ setRecords }) {
+  const [openModal, setOpenModal] = useState(false)
   const {
     values,
+    setValues,
     errors,
     setErrors,
     dateOfBirth,
@@ -41,10 +45,6 @@ function EmployeeForm() {
       temp.firstName = fieldValues.firstName ? '' : 'This field is required.'
     if ('lastName' in fieldValues)
       temp.lastName = fieldValues.lastName ? '' : 'This field is required.'
-    // if ('dateofBirth' in fieldValues)
-    //   temp.dateofBirth = fieldValues.dateofBirth.length > 5 ? '' : 'This field is required.'
-    // if ('startDate' in fieldValues)
-    //   temp.startDate = fieldValues.startDate ? '' : 'This field is required.'
     if ('departmentId' in fieldValues)
       temp.departmentId =
         fieldValues.departmentId.length !== 0 ? '' : 'This field is required.'
@@ -67,15 +67,40 @@ function EmployeeForm() {
       return Object.values(temp).every((x) => x === '')
   }
 
+  function formatDate(date) {
+    const year = date.getFullYear()
+    const month = date.getMonth() + 1
+    const day = date.getDate()
+    return `${year}/${month}/${day}`.toString()
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (validate())
-      employeeService.insertEmployee({
+    let departments = employeeServices.getDepartmentCollection()
+    let states = employeeServices.getStateCollection()
+
+    if (validate()) {
+      setValues({
         ...values,
         dateOfBirth,
         startDate
       })
-    resetForm()
+      setRecords((prevState) => {
+        return [
+          ...prevState,
+          {
+            ...values,
+            dateOfBirth: formatDate(dateOfBirth),
+            startDate: formatDate(startDate),
+            department: departments[values.departmentId - 1].title,
+            state: states[values.stateId - 1].title,
+            id: employeeServices.generateEmployeeId()
+          }
+        ]
+      })
+      resetForm()
+      // setOpenModal(true)
+    }
   }
 
   return (
@@ -114,7 +139,7 @@ function EmployeeForm() {
               label='Department'
               value={values.departmentId}
               onChange={handleInputChange}
-              options={employeeService.getDepartmentCollection()}
+              options={employeeServices.getDepartmentCollection()}
               error={errors.departmentId}
             />
             <MuiDatePicker
@@ -144,8 +169,8 @@ function EmployeeForm() {
               label='State'
               value={values.stateId}
               onChange={handleInputChange}
-              options={employeeService.getStateCollection()}
-              error={errors.state}
+              options={employeeServices.getStateCollection()}
+              error={errors.stateId}
             />
             <MuiInput
               name='zipCode'
@@ -161,6 +186,14 @@ function EmployeeForm() {
             </div>
           </Grid>
         </Grid>
+        {openModal && (
+          <Modal
+            title={<h1>Success !</h1>}
+            content={<p>An employee has been added to your list.</p>}
+            openModal={openModal}
+            onClick={() => setOpenModal(false)}
+          />
+        )}
       </Form>
     </>
   )
