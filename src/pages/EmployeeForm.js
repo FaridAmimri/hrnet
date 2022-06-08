@@ -8,7 +8,7 @@ import MuiInput from '../components/MuiInput'
 import MuiSelect from '../components/MuiSelect'
 import MuiDatePicker from '../components/MuiDatePicker'
 import MuiButton from '../components/MuiButton'
-import { Modal } from 'react-modal-css'
+import { Modal } from 'react-css-modal'
 import * as employeeServices from '../services/employeeServices'
 
 const initialFValues = {
@@ -112,8 +112,8 @@ function EmployeeForm({ setRecords }) {
         link={'/employees'}
       />
       <Form onSubmit={handleSubmit}>
-        <Grid container>
-          <Grid item xs={6}>
+        <Grid container className='formContainer'>
+          <Grid item xs={6} className='formGrid'>
             <MuiInput
               name='firstName'
               label='First Name'
@@ -149,7 +149,7 @@ function EmployeeForm({ setRecords }) {
               error={errors.startDate}
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={6} className='formGrid'>
             <MuiInput
               name='street'
               label='Street'
@@ -181,19 +181,22 @@ function EmployeeForm({ setRecords }) {
               error={errors.zipCode}
             />
             <div className='buttons'>
-              <MuiButton type='submit' text='Submit' />
-              <MuiButton color='grey' text='Reset' onClick={resetForm} />
+              <MuiButton className='submitBtn' type='submit' text='Submit' />
+              <MuiButton
+                className='resetBtn'
+                color='grey'
+                text='Reset'
+                onClick={resetForm}
+              />
             </div>
           </Grid>
         </Grid>
-        {openModal && (
-          <Modal
-            title={<h1>Success !</h1>}
-            content={<p>An employee has been added to your list.</p>}
-            openModal={openModal}
-            onClick={() => setOpenModal(false)}
-          />
-        )}
+        <Modal
+          title={<h1>Success !</h1>}
+          content={<p>An employee has been added to your list.</p>}
+          openModal={openModal}
+          onClick={() => setOpenModal(false)}
+        />
       </Form>
     </>
   )
