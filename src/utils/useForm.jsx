@@ -53,38 +53,29 @@ export function Form(props) {
   const { children, ...other } = props
 
   return (
-    <FormWrapper {...other}>
+    <FormWrapper {...other} className='formWrapper'>
       {props.children}
     </FormWrapper>
   )
 }
 
 const FormWrapper = styled.form`
-  .css-11lq3yg-MuiGrid-root {
+  .formContainer {
     height: 450px;
     background-color: white;
   }
-  .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
-    width: 80%;
-  }
-  .css-1nrlq1o-MuiFormControl-root {
-    width: 80%;
-  }
-  .css-1osj8n2-MuiGrid-root {
+  .formGrid {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
-    padding: 20px 0px 20px 50px;
+    padding: 20px 50px;
   }
-  .css-gj1fbr-MuiGrid-root {
-    margin: auto;
-  }
-  .css-jh47zj-MuiButtonBase-root-MuiButton-root {
+  .submitBtn {
     margin-right: 20px;
     width: 100px;
   }
-  .css-r99y1x-MuiButtonBase-root-MuiButton-root {
+  .resetBtn {
     background-color: #8080802b;
     width: 100px;
   }
