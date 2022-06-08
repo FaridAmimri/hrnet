@@ -136,7 +136,7 @@ function EmployeeTable({ records }) {
           ></MuiInput>
         </Toolbar>
         <Table>
-          <TableHead>
+          <TableHead className='muiTableHead'>
             <TableRow>
               {headCells.map((headCell) => (
                 <TableCell key={headCell.id}>
