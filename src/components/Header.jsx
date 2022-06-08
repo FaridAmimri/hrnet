@@ -7,13 +7,13 @@ import styled from 'styled-components'
 function Header({ title, subtitle, content, link }) {
   return (
     <HeaderWrapper>
-      <Paper>
-        <Card>
-          <PeopleOutlineOutlinedIcon />
+      <Paper className='muiPaper'>
+        <Card className='muiCard'>
+          <PeopleOutlineOutlinedIcon className='muiIcon'/>
         </Card>
         <HeaderContent>
-          <Typography variant='h6'>{title}</Typography>
-          <Typography variant='subtitle2'>{subtitle}</Typography>
+          <Typography className='muiTypography' variant='h6'>{title}</Typography>
+          <Typography className='muiTypography' variant='subtitle2'>{subtitle}</Typography>
         </HeaderContent>
         <HeaderLink>
           <Link to={link}>{content}</Link>
@@ -27,24 +27,21 @@ export default Header
 
 const HeaderWrapper = styled.header`
   margin-bottom: 20px;
-  .css-1ps6pg7-MuiPaper-root {
+  .muiPaper {
     display: flex;
     justify-content: center;
     background-color: #f4f5fd;
     padding: 15px;
   }
-  .css-bhp9pd-MuiPaper-root-MuiCard-root {
+  .muiCard {
     text-align: center;
     color: #3c44b1;
     border-radius: 12px;
-    .css-i4bv87-MuiSvgIcon-root {
-      font-size: 2.5rem;
-    }
   }
-  .css-2ulfj5-MuiTypography-root {
-    text-align: center;
+  .muiIcon {
+    font-size: 2.5rem;
   }
-  .css-ati914-MuiTypography-root {
+  .muiTypography {
     text-align: center;
   }
 `
