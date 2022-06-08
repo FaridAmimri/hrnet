@@ -5,7 +5,7 @@ import { TextField } from '@mui/material'
 function MuiInput({ name, label, value, onChange, error = null, ...other }) {
 
   return (
-    <TextField
+    <TextField className='muiTextField'
       variant='outlined'
       name={name}
       label={label}
