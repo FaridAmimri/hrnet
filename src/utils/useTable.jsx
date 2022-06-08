@@ -7,10 +7,10 @@ export function MuiTable({ children, ...other }) {
 }
 
 const TableHeadWrapper = styled.div`
-  .css-15wwp11-MuiTableHead-root {
+  .muiTableHead {
     background-color: #0000ff24;
   }
-  .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+  .muiTextField {
     width: 75%;
     margin: 2% 0;
   }
