@@ -22,7 +22,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<EmployeeForm setRecords={setRecords} />} />
+          <Route path='/p14-hrnet' element={<EmployeeForm setRecords={setRecords} />} />
           <Route path='/employees' element={<EmployeeTable records={records} />} />
         </Routes>
       </BrowserRouter>
@@ -31,3 +31,4 @@ function App() {
 }
 
 export default App
+
