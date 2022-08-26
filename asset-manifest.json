@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/hrnet/static/css/main.333a52af.css",
+    "main.js": "/hrnet/static/js/main.3da2ee2e.js",
+    "index.html": "/hrnet/index.html",
+    "main.333a52af.css.map": "/hrnet/static/css/main.333a52af.css.map",
+    "main.3da2ee2e.js.map": "/hrnet/static/js/main.3da2ee2e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.333a52af.css",
+    "static/js/main.3da2ee2e.js"
+  ]
+}
